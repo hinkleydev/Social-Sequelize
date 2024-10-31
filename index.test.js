@@ -1,5 +1,6 @@
 const { Comment, Like, Post, Profile, User } = require("./index");
 const { db } = require('./db/connection.js');
+const { describe, test, expect } = require('@jest/globals')
 
 describe('Social Sequelzie Test', () => {
     /**
@@ -8,13 +9,15 @@ describe('Social Sequelzie Test', () => {
     beforeAll(async () => {
         // the 'sync' method will create tables based on the model class
         // by setting 'force:true' the tables are recreated each time the test suite is run
-        await sequelize.sync({ force: true });
+        await db.sync({ force: true });
     })
 
     // Write your tests here
     
-    test("replace with your test", function() {
-        expect(true).toBe(true);
+    test("Connect to the database", async function() {
+        const result = await db.query("SELECT 1+1 as result;");
+        // Basic sanity check
+        expect(result[0][0].result).toBe(2);
     })
 
 
