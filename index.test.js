@@ -14,13 +14,18 @@ describe('Social Sequelzie Test', () => {
 
     // Write your tests here
     
-    test("Connect to the database", async function() {
+    test("connect to the database", async function() {
         const result = await db.query("SELECT 1+1 as result;");
         // Basic sanity check
         expect(result[0][0].result).toBe(2);
     })
 
-
+    test("comment has correct fields", async function() {
+        const comment = await Comment.create({body: "test"});
+        // Create a basic comment
+        expect(comment.body).toBe("test");
+        expect(comment.createdAt).toBeDefined(); // Leave the metadata up to Sequelize
+    })
 
 
 })
