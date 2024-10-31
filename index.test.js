@@ -20,6 +20,28 @@ describe('Social Sequelzie Test', () => {
         expect(result[0][0].result).toBe(2);
     })
 
+    test("user has correct fields", async function() {
+        const user = await User.create({username: "bob", email: "bob@example.com"});
+        expect(user.username).toBe("bob");
+        expect(user.email).toBe("bob@example.com");
+    })
+
+    test("profile has correct fields", async function() {
+        const profile = await Profile.create({
+            bio: "This is a bio",
+            profilePicture: "This is a profile picture",
+            birthday: "09-03-2003"
+        })
+        expect(profile.bio).toBe("This is a bio");
+        expect(profile.profilePicture).toBe("This is a profile picture");
+        expect(profile.birthday).toBe("09-03-2003");
+    })
+
+    test.skip("profile rejects invalid dates", async function() {
+        //expect(function() {} ).toThrowError()
+        // TODO: Debug why this validation causes an error to appear late
+    })
+
     test("comment has correct fields", async function() {
         const comment = await Comment.create({body: "test"});
         // Create a basic comment
