@@ -2,7 +2,7 @@ const { Comment, Like, Post, Profile, User } = require("./index");
 const { db } = require('./db/connection.js');
 const { describe, test, expect } = require('@jest/globals')
 
-describe('Social Sequelzie Test', () => {
+describe('Field tests', () => {
     /**
      * Runs the code prior to all tests
      */
@@ -49,13 +49,22 @@ describe('Social Sequelzie Test', () => {
         });
         expect(post.title).toBe("My blog post");
         expect(post.body).toBe("My blog content");
+        expect(post.createdAt).toBeDefined(); // Leave the metadata up to Sequelize
     })
 
     test("comment has correct fields", async function() {
         const comment = await Comment.create({body: "test"});
         // Create a basic comment
         expect(comment.body).toBe("test");
-        expect(comment.createdAt).toBeDefined(); // Leave the metadata up to Sequelize
+        expect(comment.createdAt).toBeDefined(); 
+    })
+
+    test("like has correct fields", async function() {
+        const like = await Like.create({
+            reactionType: "smile"
+        });
+        expect(like.reactionType).toBe("smile");
+        expect(like.createdAt).toBeDefined();
     })
 
 

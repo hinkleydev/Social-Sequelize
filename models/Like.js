@@ -1,4 +1,13 @@
+const { db, Model, DataTypes } = require("../db/connection.js");
 
-let Like;
+class Like extends Model {};
+Like.init(
+    {
+        reactionType: DataTypes.STRING,
+    }, 
+    {
+        sequelize: db
+    }
+)
 
 module.exports = Like;
