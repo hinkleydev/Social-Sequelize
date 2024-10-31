@@ -42,6 +42,15 @@ describe('Social Sequelzie Test', () => {
         // TODO: Debug why this validation causes an error to appear late
     })
 
+    test("post has correct fields", async function() {
+        const post = await Post.create({
+            title: "My blog post",
+            body: "My blog content"
+        });
+        expect(post.title).toBe("My blog post");
+        expect(post.body).toBe("My blog content");
+    })
+
     test("comment has correct fields", async function() {
         const comment = await Comment.create({body: "test"});
         // Create a basic comment
